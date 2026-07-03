@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PathForge - No-code 3D website animation editor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="left-panel">
+        <div class="brand">
+          <div class="brand-mark">PF</div>
+          <div>
+            <p class="eyebrow">No-code 3D websites</p>
+            <h1>PathForge</h1>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Sections</h2>
+            <button id="add-section" class="small-button" type="button">Add</button>
+          </div>
+          <div id="section-list" class="section-list" aria-label="Website sections"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Layers</h2>
+            <button id="add-text" class="small-button" type="button">Text</button>
+          </div>
+          <div id="layer-list" class="layer-list" aria-label="Section layers"></div>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div class="tool-group" aria-label="Editor tools">
+            <button id="toggle-panels" class="tool-button icon-tool" type="button" title="Hide side panels">Panels</button>
+            <button class="tool-button active" data-tool="move" type="button" title="Move model and text">Move</button>
+            <button class="tool-button" data-tool="path" type="button" title="Draw motion path">Path</button>
+            <button id="play-preview" class="tool-button play-button" type="button" title="Play preview">Play</button>
+          </div>
+
+          <div class="topbar-center">
+            <span id="section-title-label">Hero</span>
+            <span id="viewport-status">Move mode</span>
+          </div>
+
+          <div class="topbar-actions">
+            <label class="toggle">
+              <input id="all-sections-toggle" type="checkbox" />
+              <span>Animate all sections</span>
+            </label>
+            <button id="reset-demo" class="secondary-button" type="button">Reset</button>
+            <button id="copy-code" class="primary-button" type="button">Copy code</button>
+          </div>
+        </header>
+
+        <div class="stage-wrap">
+          <div class="canvas-label">
+            <span id="canvas-section-name">Hero</span>
+            <em>Website canvas</em>
+          </div>
+          <div class="stage-frame">
+            <div class="viewport-shell">
+              <canvas id="scene"></canvas>
+              <div id="website-layer" class="website-layer"></div>
+              <svg id="path-overlay" aria-label="Path drawing surface"></svg>
+              <button id="asset-handle" class="asset-handle" type="button" title="Drag model"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="right-panel">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Section</h2>
+          </div>
+          <label class="field">
+            <span>Name</span>
+            <input id="section-name" type="text" value="Hero" />
+          </label>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>3D Asset</h2>
+          </div>
+          <div class="asset-grid" aria-label="Premade 3D assets">
+            <button class="asset-button active" data-asset="rocket" type="button">
+              <span class="asset-swatch rocket"></span>
+              Rocket
+            </button>
+            <button class="asset-button" data-asset="cube" type="button">
+              <span class="asset-swatch cube"></span>
+              Cube
+            </button>
+            <button class="asset-button" data-asset="orb" type="button">
+              <span class="asset-swatch orb"></span>
+              Orb
+            </button>
+            <button class="asset-button" data-asset="ring" type="button">
+              <span class="asset-swatch ring"></span>
+              Ring
+            </button>
+          </div>
+          <label class="upload-zone" for="asset-upload">
+            <input id="asset-upload" type="file" accept=".glb,.gltf" />
+            <span>GLB upload placeholder</span>
+          </label>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Animation</h2>
+            <button id="clear-path" class="small-button" type="button">Clear</button>
+          </div>
+          <div class="control">
+            <label for="path-depth">3D depth</label>
+            <input id="path-depth" type="range" min="-2.5" max="2.5" step="0.1" value="0" />
+          </div>
+          <div class="control">
+            <label for="scale">Asset scale</label>
+            <input id="scale" type="range" min="0.45" max="1.8" step="0.05" value="1" />
+          </div>
+          <div class="control">
+            <label for="camera-z">Camera distance</label>
+            <input id="camera-z" type="range" min="4" max="9" step="0.1" value="6.2" />
+          </div>
+          <div class="point-inspector">
+            <div class="panel-heading compact-heading">
+              <h2 id="point-label">Point 1 transform</h2>
+            </div>
+            <div id="point-list" class="point-list" aria-label="Path points"></div>
+            <div class="control">
+              <label for="point-x">Position X</label>
+              <input id="point-x" type="range" min="-100" max="100" step="1" value="0" />
+            </div>
+            <div class="control">
+              <label for="point-y">Position Y</label>
+              <input id="point-y" type="range" min="-100" max="100" step="1" value="0" />
+            </div>
+            <div class="control">
+              <label for="point-z">Position Z</label>
+              <input id="point-z" type="range" min="-3" max="3" step="0.05" value="0" />
+            </div>
+            <div class="control">
+              <label for="point-pitch">Rotate X</label>
+              <input id="point-pitch" type="range" min="-180" max="180" step="1" value="0" />
+            </div>
+            <div class="control">
+              <label for="point-yaw">Rotate Y</label>
+              <input id="point-yaw" type="range" min="-180" max="180" step="1" value="0" />
+            </div>
+            <div class="control">
+              <label for="point-roll">Rotate Z</label>
+              <input id="point-roll" type="range" min="-180" max="180" step="1" value="0" />
+            </div>
+          </div>
+          <div class="segmented" aria-label="Lighting preset">
+            <button class="segment active" data-light="studio" type="button">Studio</button>
+            <button class="segment" data-light="soft" type="button">Soft</button>
+            <button class="segment" data-light="neon" type="button">Neon</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <div id="code-modal" class="modal-backdrop" hidden>
+      <section class="code-modal" role="dialog" aria-modal="true" aria-labelledby="code-modal-title">
+        <div class="code-modal-heading">
+          <div>
+            <p class="eyebrow">Generated output</p>
+            <h2 id="code-modal-title">Website-ready snippet</h2>
+          </div>
+          <div class="modal-actions">
+            <button id="copy-again" class="secondary-button" type="button">Copy</button>
+            <button id="close-code" class="small-button" type="button">Close</button>
+          </div>
+        </div>
+        <p id="copy-status" class="copy-status">Copied to clipboard</p>
+        <pre><code id="generated-code"></code></pre>
+      </section>
+    </div>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
