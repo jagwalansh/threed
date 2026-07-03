@@ -1,0 +1,24 @@
+{
+  "name": "pathforge-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
+    "autoprefixer": "^10.5.2",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^4.3.2"
+  }
+}

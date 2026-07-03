@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PathForge is a no-code 3D website animation editor. Draw motion paths, position 3D assets, and export production-ready code — no Three.js setup required." />
     <title>PathForge - No-code 3D website animation editor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,168 +14,442 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="app-shell">
+    <!-- Loading skeleton -->
+    <div id="loading-skeleton" class="loading-skeleton">
+      <div class="loading-logo">
+        <div class="brand-mark loading-pulse">PF</div>
+        <span>Loading PathForge…</span>
+      </div>
+    </div>
+
+    <header class="window-chrome" aria-label="App window">
+      <div class="traffic-lights" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <button class="chrome-home" type="button" title="Home">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M2.5 7.2L8 2.8l5.5 4.4v6.3h-4V9h-3v4.5h-4z"/></svg>
+      </button>
+      <div class="chrome-tab active">
+        <span class="tab-icon"></span>
+        <strong>Untitled</strong>
+        <button type="button" title="Close">×</button>
+      </div>
+      <div class="chrome-tab">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M5 3l8 5-8 5z"/></svg>
+        <strong>Untitled</strong>
+      </div>
+      <button class="chrome-plus" type="button" title="New file">+</button>
+      <div class="chrome-spacer"></div>
+      <span class="chrome-status">PathForge</span>
+    </header>
+
+    <main class="app-shell" id="app-shell">
+      <nav class="side-rail" aria-label="Primary">
+        <button class="rail-item active" type="button" title="File">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M5 2.5h5l3 3v10H5z"/><path d="M10 2.5v3h3"/></svg>
+          <span>File</span>
+        </button>
+        <button class="rail-item" type="button" title="Agents">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2.5l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/></svg>
+          <span>Agents</span>
+        </button>
+        <button class="rail-item" type="button" title="Assets">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="9" r="7"/><path d="M9 5v8M5 9h8"/></svg>
+          <span>Assets</span>
+        </button>
+        <button class="rail-item" type="button" title="Tools">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="6" width="12" height="9" rx="1.5"/><path d="M6.5 6V4.5A1.5 1.5 0 0 1 8 3h2a1.5 1.5 0 0 1 1.5 1.5V6"/></svg>
+          <span>Tools</span>
+        </button>
+        <button class="rail-item" type="button" title="Variables">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M9 2.5l6 3.5v6l-6 3.5-6-3.5v-6z"/><path d="M9 6v6"/></svg>
+          <span>Variables</span>
+        </button>
+      </nav>
       <aside class="left-panel">
         <div class="brand">
-          <div class="brand-mark">PF</div>
+          <div class="brand-mark">F</div>
           <div>
-            <p class="eyebrow">No-code 3D websites</p>
-            <h1>PathForge</h1>
+            <p class="eyebrow">Team project <strong>Free</strong></p>
+            <h1>Untitled</h1>
           </div>
         </div>
 
-        <section class="panel">
+        <section class="panel collapsible">
           <div class="panel-heading">
-            <h2>Sections</h2>
-            <button id="add-section" class="small-button" type="button">Add</button>
+            <button class="panel-collapse-btn" type="button" aria-expanded="true" aria-label="Toggle Sections panel">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2 3.5L5 7L8 3.5H2Z"/></svg>
+            </button>
+            <h2>Pages</h2>
+            <button id="add-section" class="small-button" type="button" title="Add new section">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="6" y1="2" x2="6" y2="10"/><line x1="2" y1="6" x2="10" y2="6"/></svg>
+              Add
+            </button>
           </div>
-          <div id="section-list" class="section-list" aria-label="Website sections"></div>
+          <div class="panel-body">
+            <div id="section-list" class="section-list" aria-label="Website sections"></div>
+          </div>
         </section>
 
-        <section class="panel">
+        <section class="panel collapsible">
           <div class="panel-heading">
+            <button class="panel-collapse-btn" type="button" aria-expanded="true" aria-label="Toggle Layers panel">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2 3.5L5 7L8 3.5H2Z"/></svg>
+            </button>
             <h2>Layers</h2>
-            <button id="add-text" class="small-button" type="button">Text</button>
+            <button id="add-text" class="small-button" type="button" title="Add text layer (T)">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="6" y1="2" x2="6" y2="10"/><line x1="3" y1="2" x2="9" y2="2"/></svg>
+              Text
+            </button>
           </div>
-          <div id="layer-list" class="layer-list" aria-label="Section layers"></div>
+          <div class="panel-body">
+            <div id="layer-list" class="layer-list" aria-label="Section layers"></div>
+          </div>
         </section>
       </aside>
 
       <section class="workspace">
         <header class="topbar">
           <div class="tool-group" aria-label="Editor tools">
-            <button id="toggle-panels" class="tool-button icon-tool" type="button" title="Hide side panels">Panels</button>
-            <button class="tool-button active" data-tool="move" type="button" title="Move model and text">Move</button>
-            <button class="tool-button" data-tool="path" type="button" title="Draw motion path">Path</button>
-            <button id="play-preview" class="tool-button play-button" type="button" title="Play preview">Play</button>
+            <button id="toggle-panels" class="tool-button icon-tool" type="button" title="Toggle side panels">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+                <rect x="1.5" y="2.5" width="13" height="11" rx="2"/>
+                <line x1="5.5" y1="2.5" x2="5.5" y2="13.5"/>
+                <line x1="10.5" y1="2.5" x2="10.5" y2="13.5"/>
+              </svg>
+            </button>
+
+            <div class="tool-divider"></div>
+
+            <button id="undo-btn" class="tool-button" type="button" title="Undo (⌘Z)" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6h7a3 3 0 1 1 0 6H8"/>
+                <polyline points="5 3 3 6 5 9"/>
+              </svg>
+            </button>
+            <button id="redo-btn" class="tool-button" type="button" title="Redo (⌘⇧Z)" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 6H6a3 3 0 1 0 0 6h2"/>
+                <polyline points="11 3 13 6 11 9"/>
+              </svg>
+            </button>
+
+            <div class="tool-divider"></div>
+
+            <button class="tool-button active" data-tool="move" type="button" title="Move tool (V)">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M3.5 1L3.5 12.3L6.2 9.5L9 14L10.8 13L8 8.5L11.8 8.5L3.5 1Z"/>
+              </svg>
+            </button>
+            <button class="tool-button" data-tool="path" type="button" title="Path tool (P)">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+                <path d="M2.5 13C4 8 7 4 13.5 3" stroke-dasharray="2 3"/>
+                <circle cx="2.5" cy="13" r="2" fill="currentColor" stroke="none"/>
+                <circle cx="13.5" cy="3" r="2" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
+
+            <div class="tool-divider"></div>
+
+            <button id="toggle-grid" class="tool-button" type="button" title="Toggle Layout Grid (Ctrl+G)">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="1" x2="3" y2="15"/>
+                <line x1="8" y1="1" x2="8" y2="15"/>
+                <line x1="13" y1="1" x2="13" y2="15"/>
+                <line x1="1" y1="3" x2="15" y2="3"/>
+                <line x1="1" y1="8" x2="15" y2="8"/>
+                <line x1="1" y1="13" x2="15" y2="13"/>
+              </svg>
+            </button>
+
+            <div class="tool-divider"></div>
+
+            <button id="play-preview" class="tool-button play-button" type="button" title="Play / Pause (Space)">
+              <svg class="icon-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.5L13 8L4.5 13.5V2.5Z"/></svg>
+              <svg class="icon-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display:none"><rect x="3" y="2.5" width="3.5" height="11" rx="0.8"/><rect x="9.5" y="2.5" width="3.5" height="11" rx="0.8"/></svg>
+            </button>
           </div>
 
           <div class="topbar-center">
             <span id="section-title-label">Hero</span>
+            <span class="topbar-dot">·</span>
             <span id="viewport-status">Move mode</span>
           </div>
 
           <div class="topbar-actions">
+            <div class="zoom-controls">
+              <button id="zoom-out" class="tool-button mini" type="button" title="Zoom out (−)">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3" y1="7" x2="11" y2="7"/></svg>
+              </button>
+              <span id="zoom-level" class="zoom-badge">100%</span>
+              <button id="zoom-in" class="tool-button mini" type="button" title="Zoom in (+)">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="7" y1="3" x2="7" y2="11"/><line x1="3" y1="7" x2="11" y2="7"/></svg>
+              </button>
+              <button id="zoom-reset" class="tool-button mini" type="button" title="Reset zoom (0)">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+                  <circle cx="6" cy="6" r="4"/>
+                  <line x1="9" y1="9" x2="12" y2="12"/>
+                </svg>
+              </button>
+            </div>
             <label class="toggle">
               <input id="all-sections-toggle" type="checkbox" />
-              <span>Animate all sections</span>
+              <span>All sections</span>
             </label>
-            <button id="reset-demo" class="secondary-button" type="button">Reset</button>
-            <button id="copy-code" class="primary-button" type="button">Copy code</button>
+            <button id="reset-demo" class="secondary-button" type="button" title="Reset to default">Reset</button>
+            <button id="copy-code" class="primary-button" type="button" title="Generate & copy code (⌘C)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4.5" y="4.5" width="8" height="8" rx="1.5"/>
+                <path d="M9.5 4.5V2.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/>
+              </svg>
+              Export code
+            </button>
           </div>
         </header>
 
-        <div class="stage-wrap">
-          <div class="canvas-label">
-            <span id="canvas-section-name">Hero</span>
-            <em>Website canvas</em>
-          </div>
-          <div class="stage-frame">
-            <div class="viewport-shell">
-              <canvas id="scene"></canvas>
-              <div id="website-layer" class="website-layer"></div>
-              <svg id="path-overlay" aria-label="Path drawing surface"></svg>
-              <button id="asset-handle" class="asset-handle" type="button" title="Drag model"></button>
+        <div class="stage-wrap" id="stage-wrap">
+          <div class="stage-pages" id="stage-pages">
+            <div id="section-pages-before" class="section-page-stack" aria-label="Sections above current page"></div>
+            <div class="canvas-label">
+              <span id="canvas-section-name">Hero</span>
+              <em>Website canvas</em>
             </div>
+            <div class="stage-frame" id="stage-frame">
+              <div class="viewport-shell">
+                <canvas id="scene"></canvas>
+                <!-- Figma-Style Layout Columns Grid Overlay -->
+                <div id="layout-grid-overlay" class="layout-grid-overlay" hidden>
+                  <div class="grid-columns-container">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div id="website-layer" class="website-layer"></div>
+                <svg id="path-overlay" aria-label="Path drawing surface"></svg>
+                <button id="asset-handle" class="asset-handle" type="button" title="Drag model"></button>
+                
+                <!-- Spline-Style Viewport Orientation Gizmo -->
+                <div class="orientation-gizmo-container" title="Click axes to align camera">
+                  <canvas id="gizmo-canvas"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline scrubber -->
+            <div class="timeline-bar" id="timeline-bar">
+              <button id="timeline-play" class="timeline-play-btn" type="button" title="Play / Pause">
+                <svg class="tl-icon-play" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M3 1.5L10.5 6L3 10.5V1.5Z"/></svg>
+                <svg class="tl-icon-pause" width="12" height="12" viewBox="0 0 12 12" fill="currentColor" style="display:none"><rect x="2" y="1.5" width="3" height="9" rx="0.6"/><rect x="7" y="1.5" width="3" height="9" rx="0.6"/></svg>
+              </button>
+              <input id="scrubber" class="scrubber" type="range" min="0" max="1" step="0.001" value="0" aria-label="Animation progress" />
+              <span id="time-display" class="time-display">0.0s / 3.2s</span>
+              <label class="toggle mini-toggle">
+                <input id="loop-toggle" type="checkbox" />
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" title="Loop">
+                  <path d="M11 4H4.5a2.5 2.5 0 0 0 0 5H10"/>
+                  <polyline points="9 2 11 4 9 6"/>
+                </svg>
+              </label>
+            </div>
+            <div id="section-pages-after" class="section-page-stack" aria-label="Sections below current page"></div>
           </div>
         </div>
       </section>
 
       <aside class="right-panel">
-        <section class="panel">
+        <div class="inspector-top">
+          <div class="avatar-dot"></div>
+          <button class="inspector-play" type="button" title="Preview">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2.5L13 8L4.5 13.5V2.5Z"/></svg>
+          </button>
+        </div>
+        <div class="inspector-tabs" aria-label="Inspector modes">
+          <button class="active" type="button">Design</button>
+          <button type="button">Prototype</button>
+          <span id="inspector-zoom-copy">100%</span>
+        </div>
+        <section class="panel collapsible">
           <div class="panel-heading">
+            <button class="panel-collapse-btn" type="button" aria-expanded="true" aria-label="Toggle Section panel">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2 3.5L5 7L8 3.5H2Z"/></svg>
+            </button>
             <h2>Section</h2>
           </div>
-          <label class="field">
-            <span>Name</span>
-            <input id="section-name" type="text" value="Hero" />
-          </label>
+          <div class="panel-body">
+            <label class="field">
+              <span>Name</span>
+              <input id="section-name" type="text" value="Hero" />
+            </label>
+            <label class="field" style="margin-top:10px">
+              <span>Background</span>
+              <div class="color-input-wrap">
+                <input id="section-bg" type="color" value="#ffffff" class="color-swatch-input" />
+                <input id="section-bg-hex" type="text" value="#ffffff" class="color-hex-input" placeholder="#ffffff" />
+              </div>
+            </label>
+          </div>
         </section>
 
-        <section class="panel">
+        <section class="panel collapsible">
           <div class="panel-heading">
-            <h2>3D Asset</h2>
+            <button class="panel-collapse-btn" type="button" aria-expanded="true" aria-label="Toggle 3D Asset panel">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2 3.5L5 7L8 3.5H2Z"/></svg>
+            </button>
+            <h2>3D Assets</h2>
           </div>
-          <div class="asset-grid" aria-label="Premade 3D assets">
-            <button class="asset-button active" data-asset="rocket" type="button">
-              <span class="asset-swatch rocket"></span>
-              Rocket
-            </button>
-            <button class="asset-button" data-asset="cube" type="button">
-              <span class="asset-swatch cube"></span>
-              Cube
-            </button>
-            <button class="asset-button" data-asset="orb" type="button">
-              <span class="asset-swatch orb"></span>
-              Orb
-            </button>
-            <button class="asset-button" data-asset="ring" type="button">
-              <span class="asset-swatch ring"></span>
-              Ring
-            </button>
+          <div class="panel-body">
+            <label class="asset-search">
+              <span>Asset library</span>
+              <input id="asset-search" type="search" placeholder="Search shapes, UI, motion..." />
+            </label>
+            <div id="asset-grid" class="asset-grid" aria-label="Premade 3D assets"></div>
+            <label class="upload-zone" for="asset-upload">
+              <input id="asset-upload" type="file" accept=".glb,.gltf" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13V3"/>
+                <polyline points="6 7 10 3 14 7"/>
+                <path d="M3 13v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/>
+              </svg>
+              <span>Upload GLB / GLTF</span>
+            </label>
           </div>
-          <label class="upload-zone" for="asset-upload">
-            <input id="asset-upload" type="file" accept=".glb,.gltf" />
-            <span>GLB upload placeholder</span>
-          </label>
         </section>
 
-        <section class="panel">
+        <section class="panel collapsible">
           <div class="panel-heading">
+            <button class="panel-collapse-btn" type="button" aria-expanded="true" aria-label="Toggle Animation panel">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2 3.5L5 7L8 3.5H2Z"/></svg>
+            </button>
             <h2>Animation</h2>
-            <button id="clear-path" class="small-button" type="button">Clear</button>
+            <button id="clear-path" class="small-button" type="button" title="Clear all path points">Clear</button>
           </div>
-          <div class="control">
-            <label for="path-depth">3D depth</label>
-            <input id="path-depth" type="range" min="-2.5" max="2.5" step="0.1" value="0" />
+          <div class="panel-body">
+            <div class="control">
+              <label for="easing">Easing preset</label>
+              <select id="easing" class="select-input">
+                <option value="linear">Linear</option>
+                <option value="easeInOut" selected>Ease In-Out</option>
+                <option value="easeIn">Ease In</option>
+                <option value="easeOut">Ease Out</option>
+                <option value="spring">Spring</option>
+                <option value="custom">Custom Bezier</option>
+              </select>
+            </div>
+
+            <!-- Figma/Spline Custom Cubic Bezier Graph Editor -->
+            <div id="bezier-editor-panel" class="bezier-editor-panel" style="display: none;">
+              <span class="panel-sublabel">Drag graph handles to customize easing</span>
+              <div class="bezier-canvas-wrapper">
+                <canvas id="bezier-canvas" width="220" height="150"></canvas>
+              </div>
+              <div class="bezier-coordinate-row">
+                <div class="bezier-coord">
+                  <label for="bezier-x1">P1 x</label>
+                  <input id="bezier-x1" type="number" min="0" max="1" step="0.05" value="0.25" />
+                </div>
+                <div class="bezier-coord">
+                  <label for="bezier-y1">P1 y</label>
+                  <input id="bezier-y1" type="number" min="-1" max="2" step="0.05" value="0.25" />
+                </div>
+                <div class="bezier-coord">
+                  <label for="bezier-x2">P2 x</label>
+                  <input id="bezier-x2" type="number" min="0" max="1" step="0.05" value="0.75" />
+                </div>
+                <div class="bezier-coord">
+                  <label for="bezier-y2">P2 y</label>
+                  <input id="bezier-y2" type="number" min="-1" max="2" step="0.05" value="0.75" />
+                </div>
+              </div>
+            </div>
+
+            <div class="control">
+              <label for="duration">Duration (ms)</label>
+              <input id="duration" type="number" min="500" max="10000" step="100" value="3200" class="number-input" />
+            </div>
+            <div class="control">
+              <label for="path-depth">3D depth</label>
+              <input id="path-depth" type="range" min="-2.5" max="2.5" step="0.1" value="0" />
+            </div>
+            <div class="control">
+              <label for="scale">Asset scale</label>
+              <input id="scale" type="range" min="0.45" max="1.8" step="0.05" value="1" />
+            </div>
+            <div class="control">
+              <label for="camera-z">Camera distance</label>
+              <input id="camera-z" type="range" min="4" max="9" step="0.1" value="6.2" />
+            </div>
+            <div class="point-inspector">
+              <div class="panel-heading compact-heading">
+                <h2 id="point-label">Point 1 transform</h2>
+              </div>
+              <div id="point-list" class="point-list" aria-label="Path points"></div>
+              <div class="control">
+                <label for="point-x">Position X</label>
+                <input id="point-x" type="range" min="-100" max="100" step="1" value="0" />
+              </div>
+              <div class="control">
+                <label for="point-y">Position Y</label>
+                <input id="point-y" type="range" min="-100" max="100" step="1" value="0" />
+              </div>
+              <div class="control">
+                <label for="point-z">Position Z</label>
+                <input id="point-z" type="range" min="-3" max="3" step="0.05" value="0" />
+              </div>
+              <div class="control">
+                <label for="point-pitch">Rotate X</label>
+                <input id="point-pitch" type="range" min="-180" max="180" step="1" value="0" />
+              </div>
+              <div class="control">
+                <label for="point-yaw">Rotate Y</label>
+                <input id="point-yaw" type="range" min="-180" max="180" step="1" value="0" />
+              </div>
+              <div class="control">
+                <label for="point-roll">Rotate Z</label>
+                <input id="point-roll" type="range" min="-180" max="180" step="1" value="0" />
+              </div>
+            </div>
+            <div class="segmented" aria-label="Lighting preset">
+              <button class="segment active" data-light="studio" type="button">Studio</button>
+              <button class="segment" data-light="soft" type="button">Soft</button>
+              <button class="segment" data-light="neon" type="button">Neon</button>
+            </div>
           </div>
-          <div class="control">
-            <label for="scale">Asset scale</label>
-            <input id="scale" type="range" min="0.45" max="1.8" step="0.05" value="1" />
+        </section>
+
+        <!-- Text formatting panel (shown when text is selected) -->
+        <section class="panel collapsible" id="text-format-panel" style="display:none">
+          <div class="panel-heading">
+            <button class="panel-collapse-btn" type="button" aria-expanded="true" aria-label="Toggle Text panel">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><path d="M2 3.5L5 7L8 3.5H2Z"/></svg>
+            </button>
+            <h2>Text</h2>
           </div>
-          <div class="control">
-            <label for="camera-z">Camera distance</label>
-            <input id="camera-z" type="range" min="4" max="9" step="0.1" value="6.2" />
-          </div>
-          <div class="point-inspector">
-            <div class="panel-heading compact-heading">
-              <h2 id="point-label">Point 1 transform</h2>
-            </div>
-            <div id="point-list" class="point-list" aria-label="Path points"></div>
+          <div class="panel-body">
             <div class="control">
-              <label for="point-x">Position X</label>
-              <input id="point-x" type="range" min="-100" max="100" step="1" value="0" />
+              <label for="text-kind">Type</label>
+              <select id="text-kind" class="select-input">
+                <option value="headline">Headline</option>
+                <option value="body">Body</option>
+              </select>
             </div>
             <div class="control">
-              <label for="point-y">Position Y</label>
-              <input id="point-y" type="range" min="-100" max="100" step="1" value="0" />
+              <label for="text-size">Size (px)</label>
+              <input id="text-size" type="number" min="10" max="120" step="1" value="36" class="number-input" />
             </div>
             <div class="control">
-              <label for="point-z">Position Z</label>
-              <input id="point-z" type="range" min="-3" max="3" step="0.05" value="0" />
+              <label for="text-color">Color</label>
+              <div class="color-input-wrap">
+                <input id="text-color" type="color" value="#111827" class="color-swatch-input" />
+                <input id="text-color-hex" type="text" value="#111827" class="color-hex-input" />
+              </div>
             </div>
-            <div class="control">
-              <label for="point-pitch">Rotate X</label>
-              <input id="point-pitch" type="range" min="-180" max="180" step="1" value="0" />
-            </div>
-            <div class="control">
-              <label for="point-yaw">Rotate Y</label>
-              <input id="point-yaw" type="range" min="-180" max="180" step="1" value="0" />
-            </div>
-            <div class="control">
-              <label for="point-roll">Rotate Z</label>
-              <input id="point-roll" type="range" min="-180" max="180" step="1" value="0" />
-            </div>
-          </div>
-          <div class="segmented" aria-label="Lighting preset">
-            <button class="segment active" data-light="studio" type="button">Studio</button>
-            <button class="segment" data-light="soft" type="button">Soft</button>
-            <button class="segment" data-light="neon" type="button">Neon</button>
           </div>
         </section>
       </aside>
     </main>
 
+    <!-- Code export modal -->
     <div id="code-modal" class="modal-backdrop" hidden>
       <section class="code-modal" role="dialog" aria-modal="true" aria-labelledby="code-modal-title">
         <div class="code-modal-heading">
@@ -183,6 +458,20 @@
             <h2 id="code-modal-title">Website-ready snippet</h2>
           </div>
           <div class="modal-actions">
+            <!-- Format selector -->
+            <div class="segmented" id="export-format-selector" style="margin: 0 12px; margin-top: 0;">
+              <button class="segment active" data-format="vanilla" type="button" style="min-height: 28px; font-size: 11px;">Vanilla HTML/JS</button>
+              <button class="segment" data-format="react" type="button" style="min-height: 28px; font-size: 11px;">React (R3F)</button>
+            </div>
+            
+            <button id="download-html" class="secondary-button" type="button">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 2v8"/>
+                <polyline points="3 7 7 11 11 7"/>
+                <line x1="2" y1="13" x2="12" y2="13"/>
+              </svg>
+              Download
+            </button>
             <button id="copy-again" class="secondary-button" type="button">Copy</button>
             <button id="close-code" class="small-button" type="button">Close</button>
           </div>
@@ -191,6 +480,57 @@
         <pre><code id="generated-code"></code></pre>
       </section>
     </div>
+
+    <!-- Context menu -->
+    <div id="context-menu" class="context-menu" hidden>
+      <div class="context-menu-body" role="menu"></div>
+    </div>
+
+    <!-- Keyboard shortcuts modal -->
+    <div id="shortcuts-modal" class="modal-backdrop" hidden>
+      <section class="shortcuts-modal" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+        <div class="code-modal-heading">
+          <div>
+            <p class="eyebrow">Reference</p>
+            <h2 id="shortcuts-title">Keyboard shortcuts</h2>
+          </div>
+          <button id="close-shortcuts" class="small-button" type="button">Close</button>
+        </div>
+        <div class="shortcuts-grid">
+          <div class="shortcut-group">
+            <h3>Tools</h3>
+            <div class="shortcut-row"><kbd>V</kbd><span>Move tool</span></div>
+            <div class="shortcut-row"><kbd>P</kbd><span>Path tool</span></div>
+            <div class="shortcut-row"><kbd>T</kbd><span>Add text</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+G</kbd><span>Layout grid</span></div>
+            <div class="shortcut-row"><kbd>Space</kbd><span>Play / Pause</span></div>
+          </div>
+          <div class="shortcut-group">
+            <h3>Edit</h3>
+            <div class="shortcut-row"><kbd>⌘Z</kbd><span>Undo</span></div>
+            <div class="shortcut-row"><kbd>⌘⇧Z</kbd><span>Redo</span></div>
+            <div class="shortcut-row"><kbd>⌘D</kbd><span>Duplicate</span></div>
+            <div class="shortcut-row"><kbd>Delete</kbd><span>Delete selected</span></div>
+          </div>
+          <div class="shortcut-group">
+            <h3>View</h3>
+            <div class="shortcut-row"><kbd>+</kbd><span>Zoom in</span></div>
+            <div class="shortcut-row"><kbd>−</kbd><span>Zoom out</span></div>
+            <div class="shortcut-row"><kbd>0</kbd><span>Reset zoom</span></div>
+            <div class="shortcut-row"><kbd>[ ]</kbd><span>Prev / Next section</span></div>
+          </div>
+          <div class="shortcut-group">
+            <h3>Other</h3>
+            <div class="shortcut-row"><kbd>?</kbd><span>This dialog</span></div>
+            <div class="shortcut-row"><kbd>1–9</kbd><span>Select path point</span></div>
+            <div class="shortcut-row"><kbd>Esc</kbd><span>Deselect / Close</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
     <script type="module" src="./src/app.js"></script>
   </body>
