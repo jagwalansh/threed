@@ -167,9 +167,13 @@ input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer;
 /* ========== Section & Layer Lists ========== */
 .section-list, .layer-list { display: grid; gap: 4px; }
 .section-row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px; }
+.layer-row { display: grid; grid-template-columns: minmax(0, 1fr) 28px; gap: 4px; align-items: center; }
 .section-row.dragging { opacity: 0.45; }
 .section-row.drop-target .section-item { border-color: var(--accent); background: var(--accent-dim); }
 .section-item, .layer-item { width: 100%; min-height: 32px; border: 1px solid transparent; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 8px; color: var(--text); background: transparent; text-align: left; font-size: 12px; font-weight: 600; transition: background var(--dur-fast), border-color var(--dur-fast); }
+.layer-item { min-width: 0; }
+.layer-item span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.layer-item em { flex-shrink: 0; font-style: italic; }
 .section-item:hover, .layer-item:hover { border-color: transparent; background: #353535; }
 .section-item.active, .layer-item.active { border-color: transparent; background: #3a3a3a; }
 
@@ -319,8 +323,8 @@ kbd { display: inline-flex; align-items: center; justify-content: center; min-wi
 .timeline-bar.visible { max-height: 56px; opacity: 1; padding: 10px 0 6px; pointer-events: auto; }
 
 /* --- Section list hover reveals --- */
-.section-item .item-delete-btn, .layer-item .item-delete-btn { opacity: 0; transition: opacity var(--dur-fast), color var(--dur-fast), background var(--dur-fast); }
-.section-item:hover .item-delete-btn, .layer-item:hover .item-delete-btn, .item-delete-btn:focus-visible { opacity: 1; }
+.section-item .item-delete-btn, .layer-row .item-delete-btn { opacity: 0; transition: opacity var(--dur-fast), color var(--dur-fast), background var(--dur-fast); }
+.section-item:hover .item-delete-btn, .layer-row:hover .item-delete-btn, .item-delete-btn:focus-visible { opacity: 1; }
 .item-delete-btn:hover { color: var(--red); background: var(--red-dim); }
 .section-insert { opacity: 0; transform: translateX(-3px); transition: opacity var(--dur-fast), transform var(--dur-fast), background var(--dur-fast); }
 .section-row:hover .section-insert, .section-insert:focus-visible { opacity: 1; transform: translateX(0); }

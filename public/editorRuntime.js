@@ -1353,11 +1353,13 @@ function renderLayerList() {
   const textLayers = section.texts
     .map(
       (item) => `
-        <button class="layer-item ${item.id === state.selectedTextId ? "active" : ""}" data-id="${item.id}" type="button">
-          <span style="${item.visible === false ? "opacity:0.4;text-decoration:line-through" : ""}">${escapeHtml(item.text || "Text")}</span>
+        <div class="layer-row">
+          <button class="layer-item ${item.id === state.selectedTextId ? "active" : ""}" data-id="${item.id}" type="button">
+            <span style="${item.visible === false ? "opacity:0.4;text-decoration:line-through" : ""}">${escapeHtml(item.text || "Text")}</span>
+            <em>${item.kind === "body" ? "P" : "H"}</em>
+          </button>
           <button class="item-delete-btn" data-delete-text="${item.id}" type="button" title="Delete text layer" aria-label="Delete text"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></button>
-          <em>${item.kind === "body" ? "P" : "H"}</em>
-        </button>
+        </div>
       `,
     )
     .join("");
