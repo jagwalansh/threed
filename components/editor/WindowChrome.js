@@ -24,7 +24,7 @@ export default function WindowChrome() {
       </div>
       <button className="chrome-plus" type="button" title="New file">+</button>
       <div className="chrome-spacer" />
-      <span className="chrome-status">PathForge</span>
+      <span className="chrome-status">threeD</span>
     </header>
   );
 }

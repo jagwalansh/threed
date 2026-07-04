@@ -2,8 +2,8 @@ export function LoadingSkeleton() {
   return (
     <div id="loading-skeleton" className="loading-skeleton fixed inset-0 z-[100] grid place-items-center bg-bg transition-opacity duration-500">
       <div className="loading-logo flex flex-col items-center gap-4 text-muted text-[13px] font-semibold">
-        <div className="brand-mark loading-pulse w-[34px] h-[34px] rounded-[7px] grid place-items-center text-[#06110e] text-xs font-extrabold bg-gradient-to-br from-accent to-accent-2 shrink-0">PF</div>
-        <span>Loading PathForge…</span>
+        <div className="brand-mark loading-pulse w-[34px] h-[34px] rounded-[7px] grid place-items-center text-[#06110e] text-xs font-extrabold bg-gradient-to-br from-accent to-accent-2 shrink-0">3D</div>
+        <span>Loading threeD…</span>
       </div>
     </div>
   );

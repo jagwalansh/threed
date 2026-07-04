@@ -2026,7 +2026,7 @@ function generateVanillaCode() {
   };
 
   const json = JSON.stringify(sceneData, null, 2).replaceAll("</script>", "<\\/script>");
-  return `<!-- PathForge export: ${state.animateAllSections ? "multi-section" : "single-section"} 3D website animation -->
+  return `<!-- threeD export: ${state.animateAllSections ? "multi-section" : "single-section"} 3D website animation -->
 <div id="pathforge-site"></div>
 <script type="module">
 import * as THREE from "https://esm.sh/three@0.164.1";
@@ -2207,7 +2207,7 @@ function generateReactCode() {
   const json = JSON.stringify(sceneData, null, 2);
   
   return `/* 
-  PathForge Export: React (R3F) Component 
+  threeD Export: React (R3F) Component 
   Install dependencies:
   npm install three @react-three/fiber @react-three/drei
 */
@@ -2325,7 +2325,7 @@ function Scene3D({ scrollProgress, activeSectionIndex }) {
   );
 }
 
-export default function PathForgeSite() {
+export default function ThreeDSite() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const containerRef = useRef();
@@ -2432,7 +2432,7 @@ function downloadAsHtml() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PathForge Export</title>
+  <title>threeD Export</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; }
@@ -2447,7 +2447,7 @@ ${code}
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "pathforge-export.html";
+  a.download = "threed-export.html";
   a.click();
   URL.revokeObjectURL(url);
   showToast("Downloaded HTML file");

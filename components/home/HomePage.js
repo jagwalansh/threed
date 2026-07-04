@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const STORAGE_KEY = "pathforge.recentProjects";
-
 function formatDate(timestamp) {
   return new Intl.DateTimeFormat(undefined, {
     month: "short",
@@ -69,9 +68,9 @@ export default function HomePage() {
     <main className="home-shell min-h-screen p-7 text-[#f4f6fb] bg-bg">
       <header className="home-topbar flex items-center justify-between gap-[18px] mx-auto max-w-[1180px]">
         <div className="home-brand flex items-center gap-3">
-          <div className="home-logo w-[38px] h-[38px] rounded-[9px] grid place-items-center text-white bg-accent text-[13px] font-extrabold">PF</div>
+          <div className="home-logo w-[38px] h-[38px] rounded-[9px] grid place-items-center text-white bg-accent text-[13px] font-extrabold">3D</div>
           <div>
-            <h1 className="text-lg">PathForge</h1>
+            <h1 className="text-lg">threeD</h1>
             <p className="mt-[3px] text-muted text-[13px] font-semibold">Recent 3D website animation projects</p>
           </div>
         </div>

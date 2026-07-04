@@ -1,9 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "PathForge - No-code 3D website animation editor",
+  title: "threeD - No-code 3D website animation editor",
   description:
-    "PathForge is a no-code 3D website animation editor. Draw motion paths, position 3D assets, and export production-ready code.",
+    "threeD is a no-code 3D website animation editor. Draw motion paths, position 3D assets, and export production-ready code.",
 };
 
 export default function RootLayout({ children }) {
