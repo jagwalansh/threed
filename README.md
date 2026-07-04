@@ -1,8 +1,6 @@
 # threed
 
-<video src="./public/threed-ezgif.com-video-cutter.mov" controls autoplay muted loop playsinline>
-  Your browser does not support the video tag.
-</video>
+![threeD demo](./public/threed-demo.gif)
 
 threeD is an experimental no-code editor for designing animated 3D website experiences directly in the browser. It was made to make scroll-based 3D sections, motion paths, and interactive landing page visuals easier to create without requiring every designer or builder to set up a full Three.js project from scratch.
 
